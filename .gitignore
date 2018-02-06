@@ -1,0 +1,5 @@
+.Rhistory
+*.aux
+*.synctex.gz
+*.log
+_minted*
