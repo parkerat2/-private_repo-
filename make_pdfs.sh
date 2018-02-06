@@ -2,21 +2,22 @@
 
 CWD=`pwd`
 VISUALS_DIR="./visuals"
+TEX_FILE=./latex/cs5720.tex
+echo "\\documentclass{report}" > "$TEX_FILE"
+echo "\\usepackage{minted}" >> "$TEX_FILE"
+echo "\\usepackage{graphicx}" >> "$TEX_FILE"
+echo "\\usepackage{verbatim}" >> "$TEX_FILE"
+echo "\\begin{document}" >> "$TEX_FILE"
+echo "    \\title{CS 5720: Data Visualization}" >> "$TEX_FILE"
+echo "    \\maketitle" >> "$TEX_FILE"
 for d in $VISUALS_DIR/* ; do
   DATA_PATH=`cat "$d/data_path"`
   OUTPUTS=`cat "$d/output_files"`
-  TEX_FILE=./latex/`basename $d`.tex
   echo "TEX_FILE=$TEX_FILE"
   echo "DATA_PATH=$DATA_PATH"
   echo "OUTPUTS=$OUTPUTS"
  
-  echo "\\documentclass{article}" > "$TEX_FILE"
-  echo "\\usepackage{minted}" >> "$TEX_FILE"
-  echo "\\usepackage{graphicx}" >> "$TEX_FILE"
-  echo "\\usepackage{verbatim}" >> "$TEX_FILE"
-  echo "\\begin{document}" >> "$TEX_FILE"
-  echo "    \\title{${d//_/\\_}}" >> "$TEX_FILE"
-  echo "    \\maketitle" >> "$TEX_FILE"
+  echo "    \\chapter{${d//_/\\_}}" >> "$TEX_FILE"
   echo "    \\section{Description}" >> "$TEX_FILE"
   echo "    \\small" >> "$TEX_FILE"
   echo "    \\verbatiminput{../$d/README.md}" >> "$TEX_FILE"
