@@ -31,23 +31,23 @@ for d in $VISUALS_DIR/* ; do
 
     for PYTHON_FILE in `find "$DIR_NAME" -name "*.[Pp][Yy]"`; do
       echo "    \\subsection{${PYTHON_FILE//_/\\_}}" >> "$TEX_FILE"
-      echo "    \\inputminted{python}{../$PYTHON_FILE}" >> "$TEX_FILE"
+      echo "    \\inputminted[breaklines=true]{python}{../$PYTHON_FILE}" >> "$TEX_FILE"
     done
     for R_FILE in `find "$DIR_NAME" -name "*.[Rr]"`; do
       echo "    \\subsection{${R_FILE//_/\\_}}" >> "$TEX_FILE"
-      echo "    \\inputminted{r}{../$R_FILE}" >> "$TEX_FILE"
+      echo "    \\inputminted[breaklines=true]{r}{../$R_FILE}" >> "$TEX_FILE"
     done
     for JAVA_FILE in `find "$DIR_NAME" -name "*.[Jj][Aa][Vv][Aa]"`; do
       echo "    \\subsection{${JAVA_FILE//_/\\_}}" >> "$TEX_FILE"
-      echo "    \\inputminted{java}{../$JAVA_FILE}" >> "$TEX_FILE"
+      echo "    \\inputminted[breaklines=true]{java}{../$JAVA_FILE}" >> "$TEX_FILE"
     done
     for C_FILE in `find "$DIR_NAME" -name "*.[CcHh]"`; do
       echo "    \\subsection{${C_FILE//_/\\_}}" >> "$TEX_FILE"
-      echo "    \\inputminted{c}{../$C_FILE}" >> "$TEX_FILE"
+      echo "    \\inputminted[breaklines=true]{c}{../$C_FILE}" >> "$TEX_FILE"
     done
     for CPP_FILE in `find "$DIR_NAME" -name "*.[CcHh][Pp][Pp]"`; do
       echo "    \\subsection{${CPP_FILE//_/\\_}}" >> "$TEX_FILE"
-      echo "    \\inputminted{cpp}{../$CPP_FILE}" >> "$TEX_FILE"
+      echo "    \\inputminted[breaklines=true]{cpp}{../$CPP_FILE}" >> "$TEX_FILE"
     done
 
     echo "$DIR_NAME"
@@ -58,5 +58,10 @@ for d in $VISUALS_DIR/* ; do
       echo "    \\includegraphics[width=\\textwidth]{../$OUTPUT_FILE}" >> "$TEX_FILE"
     done
   done
-  echo "\\end{document}" >> "$TEX_FILE"
 done
+echo "\\end{document}" >> "$TEX_FILE"
+
+cd "$CWD/latex"
+pdflatex -shell-escape -synctex=1 -interaction=nonstopmode cs5720.tex
+cd "$CWD"
+
